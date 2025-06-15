@@ -1,0 +1,88 @@
+<header class="header">
+  <div class="container header__container">
+    <div class="header__logo">
+      <i class="ri-car-line header__logo-icon"></i>
+      <span class="header__logo-text">Auto Test</span>
+    </div>
+    
+    <!-- Mobile menu button -->
+    <button class="header__menu-btn" (click)="toggleMobileMenu()">
+      <i class="ri-menu-line"></i>
+    </button>
+
+    <!-- Mobile menu overlay -->
+    <div class="header__mobile-overlay" *ngIf="isMobileMenuOpen" (click)="closeMobileMenu()"></div>
+
+    <!-- Mobile menu -->
+    <div class="header__mobile-menu" [class.header__mobile-menu--open]="isMobileMenuOpen">
+      <div class="header__mobile-menu-header">
+        <button class="header__mobile-close" (click)="closeMobileMenu()">
+          <i class="ri-close-line"></i>
+        </button>
+      </div>
+
+      <nav class="header__mobile-nav">
+        <ng-container *ngIf="!isLoggedIn">
+          <a routerLink="/about" class="header__mobile-link" (click)="closeMobileMenu()">Biz haqimizda</a>
+          <a routerLink="/login" class="header__mobile-link" (click)="closeMobileMenu()">Kirish</a>
+          <a routerLink="/register" class="header__mobile-link header__mobile-link--primary" (click)="closeMobileMenu()">Ro'yxatdan o'tish</a>
+        </ng-container>
+        <ng-container *ngIf="isLoggedIn">
+          <div class="header__mobile-user">
+            <div class="header__mobile-avatar">
+              <span class="header__avatar-text">{{ user?.firstName?.charAt(0) || 'U' }}</span>
+            </div>
+            <div class="header__mobile-user-info">
+              <div class="header__mobile-user-name">{{ user?.firstName }} {{ user?.lastName }}</div>
+              <div class="header__mobile-user-phone">+{{ user?.phoneNumber }}</div>
+            </div>
+          </div>
+          <a routerLink="/profile" class="header__mobile-link" (click)="closeMobileMenu()">
+            <i class="ri-user-line"></i>
+            Profil ma'lumotlari
+          </a>
+          <button class="header__mobile-link header__mobile-link--danger" (click)="logout(); closeMobileMenu()">
+            <i class="ri-logout-box-line"></i>
+            Chiqish
+          </button>
+        </ng-container>
+      </nav>
+    </div>
+
+    <!-- Desktop navigation -->
+    <nav class="header__nav">
+      <ng-container *ngIf="!isLoggedIn">
+        <a routerLink="/about" class="header__link">Biz haqimizda</a>
+        <button class="header__btn" routerLink="/login">Kirish</button>
+        <button class="header__btn header__btn--primary" routerLink="/register">Ro'yxatdan o'tish</button>
+      </ng-container>
+      <ng-container *ngIf="isLoggedIn">
+        <div class="header__avatar-container">
+          <button class="header__avatar" (click)="toggleDropdown()">
+            <span class="header__avatar-text">{{ user?.firstName?.charAt(0) || 'U' }}</span>
+          </button>
+          <div class="header__dropdown" *ngIf="isDropdownOpen">
+            <div class="header__dropdown-header">
+              <div class="header__dropdown-avatar">
+                <span class="header__avatar-text">{{ user?.firstName?.charAt(0) || 'U' }}</span>
+              </div>
+              <div class="header__dropdown-info">
+                <div class="header__dropdown-name">{{ user?.firstName }} {{ user?.lastName }}</div>
+                <div class="header__dropdown-phone">+{{ user?.phoneNumber }}</div>
+              </div>
+            </div>
+            <div class="header__dropdown-divider"></div>
+            <a routerLink="/profile" class="header__dropdown-item" (click)="closeDropdown()">
+              <i class="ri-user-line header__dropdown-icon"></i>
+              Profil ma'lumotlari
+            </a>
+            <button class="header__dropdown-item header__dropdown-item--danger" (click)="logout()">
+              <i class="ri-logout-box-line header__dropdown-icon"></i>
+              Chiqish
+            </button>
+          </div>
+        </div>
+      </ng-container>
+    </nav>
+  </div>
+</header> 

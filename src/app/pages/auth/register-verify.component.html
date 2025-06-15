@@ -1,0 +1,18 @@
+<div class="verify-page">
+    <div class="verify-card">
+      <h2>Tasdiqlash Kodi</h2>
+      <p class="verify-desc">+{{ phoneNumber }} raqamiga 6 raqamli kod yuborildi</p>
+      <form [formGroup]="verifyForm" (ngSubmit)="onSubmit()">
+        <div class="code-input-group">
+          <input formControlName="code" maxlength="6" type="text" placeholder="------" />
+        </div>
+        <button class="verify-btn" [disabled]="verifyForm.invalid || loading">Tasdiqlash</button>
+      </form>
+      <div class="verify-footer">
+        <button type="button" class="resend-btn" (click)="resendCode()" [disabled]="isResending">
+          {{ isResending ? 'Qayta yuborish (' + countdown + ')' : 'Qayta yuborish' }}
+        </button>
+        <a (click)="goBack()">Orqaga qaytish</a>
+      </div>
+    </div>
+  </div> 

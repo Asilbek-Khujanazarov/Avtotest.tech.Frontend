@@ -1,0 +1,44 @@
+<div class="register-page">
+  <form [formGroup]="registerForm" class="register-card" (ngSubmit)="onSubmit()">
+    <h2>Ro'yxatdan O'tish</h2>
+    <p class="register-desc">Auto Test platformasida akkaunt yarating</p>
+    <div class="form-group">
+      <label>Ism</label>
+      <input formControlName="firstName" type="text" placeholder="Ismingizni kiriting" />
+    </div>
+    <div class="form-group">
+      <label>Familiya</label>
+      <input formControlName="lastName" type="text" placeholder="Familiyangizni kiriting" />
+    </div>
+    <div class="form-group">
+      <label>Jins</label>
+      <select formControlName="gender">
+        <option value="" disabled selected>Jinsni tanlang</option>
+        <option *ngFor="let g of genders" [value]="g.value">{{g.label}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Telefon Raqam</label>
+      <div class="phone-group">
+        <select formControlName="countryCode" class="phone-prefix">
+          <option *ngFor="let code of countryCodes" [value]="code.value">{{code.label}}</option>
+        </select>
+        <input formControlName="phone" type="text" maxlength="9" placeholder="901234567" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Parol</label>
+      <div class="password-group">
+        <input [type]="hidePassword ? 'password' : 'text'" formControlName="password" placeholder="Parolni kiriting" />
+        <button type="button" class="toggle-password" (click)="hidePassword = !hidePassword" tabindex="-1">
+          <i *ngIf="hidePassword" class="ri-eye-line"></i>
+          <i *ngIf="!hidePassword" class="ri-eye-off-line"></i>
+        </button>
+      </div>
+    </div>
+    <button class="register-btn" [disabled]="registerForm.invalid || loading">Ro'yxatdan O'tish</button>
+    <div class="register-footer">
+      Allaqachon akkauntingiz bormi? <a (click)="goToLogin()">Kirish</a>
+    </div>
+  </form>
+</div> 
