@@ -1,14 +1,16 @@
 {
   "name": "auto-test.frontend",
   "version": "0.0.0",
-"scripts": {
-  "ng": "ng",
-  "build": "npm run build:ssr",
-  "build:ssr": "ng build && ng run AutoTest.Frontend:server",
-  "start": "node dist/auto-test.frontend/server/main.js"
-},
+  "engines": {
+    "node": "18.x"
+  },
+  "scripts": {
+    "ng": "ng",
+    "build": "npm run build:ssr",
+    "build:ssr": "ng build && ng run AutoTest.Frontend:server",
+    "start": "node dist/auto-test.frontend/server/main.js"
+  },
   "type": "module",
-
   "private": true,
   "dependencies": {
     "@angular/common": "^19.2.0",
