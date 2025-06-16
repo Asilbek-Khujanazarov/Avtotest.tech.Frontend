@@ -1,13 +1,14 @@
 {
   "name": "auto-test.frontend",
   "version": "0.0.0",
-    "engines": {
+  "engines": {
     "node": "20.x"
   },
   "scripts": {
+    "heroku-postbuild": "npm run build:ssr",
     "build:ssr": "ng build --configuration production && ng run AutoTest.Frontend:server:production",
     "serve:ssr": "node dist/auto-test.frontend/server/main.server.mjs",
-    "start": "npm run build:ssr && npm run serve:ssr"
+    "start": "npm run serve:ssr"
   },
   "private": true,
   "dependencies": {
@@ -32,7 +33,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^19.2.14",
-    "@angular/cli": "^19.2.14",
+    "@angular/cli": "^19.2.15",
     "@angular/compiler-cli": "^19.2.0",
     "@types/express": "^4.17.17",
     "@types/jasmine": "~5.1.0",
