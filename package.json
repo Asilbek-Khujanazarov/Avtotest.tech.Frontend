@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "build": "ng build",
-    "build:ssr": "ng build && ng run AutoTest.Frontend:server",
+    "build:ssr": "ng build --configuration production && ng run AutoTest.Frontend:server:production",
     "serve:ssr": "node dist/auto-test.frontend/server/main.server.mjs",
     "start": "npm run build:ssr && npm run serve:ssr"
   },
