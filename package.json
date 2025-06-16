@@ -3,11 +3,11 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node dist/auto-test.frontend/server/main.mjs",
-    "build": "ng build && ng run auto-test.frontend:server",
-    "heroku-postbuild": "ng build && ng run auto-test.frontend:server",
+    "start": "ng serve",
+    "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "serve:ssr:AutoTest.Frontend": "node dist/auto-test.frontend/server/server.mjs"
   },
   "private": true,
   "dependencies": {

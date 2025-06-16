@@ -8,6 +8,6 @@ RUN npm run build -- --configuration production
 # Production stage (nginx)
 FROM nginx:alpine
 # Mana bu qatorga e'tibor bering!
-COPY --from=build /app/dist/auto-test.frontend /index.html
+COPY --from=build /app/dist/auto-test.frontend /
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
