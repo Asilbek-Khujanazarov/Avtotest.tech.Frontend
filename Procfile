@@ -1,1 +1,1 @@
-web: npx serve -s dist/avto-test.frontend/index.html --port $PORT --single
+web: npx serve -s dist/avto-test.frontend/browser
