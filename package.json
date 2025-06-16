@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "ng serve --port 8080 --host 0.0.0.0",
+    "build": "ng build  --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:AutoTest.Frontend": "node dist/auto-test.frontend/server/server.mjs"
+    "serve:ssr:AutoTest.Frontend": "node dist/auto-test.frontend/server/server.mjs",
+    "postinstall": "ng build --configuration production"
   },
   "private": true,
   "dependencies": {

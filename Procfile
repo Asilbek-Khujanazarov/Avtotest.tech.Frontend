@@ -1,1 +1,1 @@
-web: npx serve -s dist/auto-test.frontend
+web: npx serve -s dist/avto-test.frontend
