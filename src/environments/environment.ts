@@ -1,4 +1,5 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:5004/api' // yoki sizning lokal backend portingiz
-};
+  apiUrl: 'https://avtotestbackent-48fbb0113df3.herokuapp.com/api'
+}; 
+
