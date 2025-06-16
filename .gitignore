@@ -1,7 +1,9 @@
-# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
-
 # Compiled output
-/dist
+# dist'ni to‘liq chiqarib tashlash emas, faqat kerakli qismini qo‘shamiz:
+dist/*
+!dist/auto-test.frontend
+!dist/auto-test.frontend/**/*
+
 /tmp
 /out-tsc
 /bazel-out
