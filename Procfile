@@ -1,1 +1,1 @@
-web: npx serve -s dist/avto-test.frontend/browser
+web: node dist/avto-test.frontend/server/main.js
