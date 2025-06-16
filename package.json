@@ -4,10 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "node dist/auto-test.frontend/server/main.server.mjs",
-    "build": "ng build && ng run auto-test.frontend:server",
+    "build": "ng build && ng run AutoTest.Frontend:server",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "build:ssr": "ng build && ng run auto-test.frontend:server",
+    "build:ssr": "ng build && ng run AutoTest.Frontend:server",
     "serve:ssr": "node dist/auto-test.frontend/server/main.server.mjs"
   },
   "private": true,
@@ -47,7 +47,7 @@
     "typescript": "~5.7.2"
   },
   "engines": {
-  "node": "20.x",
-  "npm": "11.x"
-}
+    "node": "20.x",
+    "npm": "11.x"
+  }
 }
