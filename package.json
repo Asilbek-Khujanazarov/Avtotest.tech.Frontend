@@ -1,15 +1,15 @@
 {
   "name": "auto-test.frontend",
   "version": "0.0.0",
-  "scripts": {
-    "ng": "ng",
-    "start": "node dist/auto-test.frontend/server/main.server.mjs",
-    "build": "ng build && ng run AutoTest.Frontend:server",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "build:ssr": "ng build && ng run AutoTest.Frontend:server",
-    "serve:ssr": "node dist/auto-test.frontend/server/main.server.mjs"
+"scripts": {
+  "ng": "ng",
+  "start": "ng serve",
+  "build": "ng build",
+  "build:ssr": "ng build && ng run AutoTest.Frontend:server",
+  "serve:ssr": "node dist/auto-test.frontend/server/main.js"
   },
+  "type": "module",
+
   "private": true,
   "dependencies": {
     "@angular/common": "^19.2.0",
@@ -45,9 +45,5 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.7.2"
-  },
-  "engines": {
-    "node": "20.x",
-    "npm": "11.x"
   }
 }
