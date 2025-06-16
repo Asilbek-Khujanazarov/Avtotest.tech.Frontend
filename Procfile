@@ -1,1 +1,0 @@
-web: node dist/auto-test.frontend/server/main.server.mjs
