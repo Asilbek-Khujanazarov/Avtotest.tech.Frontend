@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node dist/auto-test.frontend/server/server.mjs",
-    "build": "ng build --configuration production",
+    "start": "node dist/auto-test.frontend/server/main.server.mjs",
+    "build": "ng build && ng run auto-test.frontend:server",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:AutoTest.Frontend": "node dist/auto-test.frontend/server/server.mjs"
+    "build:ssr": "ng build && ng run auto-test.frontend:server",
+    "serve:ssr": "node dist/auto-test.frontend/server/main.server.mjs"
   },
   "private": true,
   "dependencies": {
@@ -44,5 +45,9 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.7.2"
+  },
+  "engines": {
+    "node": "16.x",
+    "npm": ">= 8.x"
   }
 }
