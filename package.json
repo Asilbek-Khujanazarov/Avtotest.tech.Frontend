@@ -8,10 +8,10 @@
     "ng": "ng",
     "build": "npm run build:ssr",
     "build:ssr": "ng build && ng run AutoTest.Frontend:server",
-   "start": "echo \"Starting SSR…\" && node dist/auto-test.frontend/server/main.js"
+   "start": "AutoTest.Frontend/dist/auto-test.frontend/server/main.js"
 
   },
-  "type": "module",
+  "type": "commonjs",
   "private": true,
   "dependencies": {
     "@angular/common": "^19.2.0",
