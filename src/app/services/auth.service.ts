@@ -73,25 +73,25 @@ export class AuthService {
 
   register(phoneNumber: string): Observable<any> {
     return this.addTimeout(
-      this.http.post(`${this.api}/api/Auth/register`, { phoneNumber })
+      this.http.post(`${this.api}/Auth/register`, { phoneNumber })
     );
   }
 
   verifyCode(data: any): Observable<any> {
     return this.addTimeout(
-      this.http.post(`${this.api}/api/Auth/register/verify`, data)
+      this.http.post(`${this.api}/Auth/register/verify`, data)
     );
   }
 
   login(phoneNumber: string, password: string): Observable<any> {
     return this.addTimeout(
-      this.http.post(`${this.api}/api/Auth/login`, { phoneNumber, password })
+      this.http.post(`${this.api}/Auth/login`, { phoneNumber, password })
     );
   }
 
   loginVerify(data: any): Observable<any> {
     return this.addTimeout(
-      this.http.post(`${this.api}/api/Auth/login/verify`, data).pipe(
+      this.http.post(`${this.api}/Auth/login/verify`, data).pipe(
         tap((response: any) => {
           if (response.token) {
             this.setToken(response.token);
@@ -106,13 +106,13 @@ export class AuthService {
 
   forgotPassword(phoneNumber: string) {
     return this.addTimeout(
-      this.http.post(`${this.api}/api/Auth/forgot-password`, { phoneNumber })
+      this.http.post(`${this.api}/Auth/forgot-password`, { phoneNumber })
     );
   }
 
   resetPassword(data: any) {
     return this.addTimeout(
-      this.http.post(`${this.api}/api/Auth/reset-password`, data)
+      this.http.post(`${this.api}/Auth/reset-password`, data)
     );
   }
 
