@@ -4,7 +4,7 @@
 "scripts": {
   "ng": "ng",
   "build": "npm run build:ssr",
-  "build:ssr": "ng build && ng run auto-test.frontend:server",
+  "build:ssr": "ng build && ng run AutoTest.Frontend:server",
   "start": "node dist/auto-test.frontend/server/main.mjs"
 },
   "type": "module",
