@@ -5,7 +5,7 @@
     "ng": "ng",
     "build": "ng build",
     "build:ssr": "ng build && ng run AutoTest.Frontend:server",
-    "serve:ssr": "node dist/auto-test.frontend/server/main.js",
+    "serve:ssr": "node dist/auto-test.frontend/server/main.server.mjs",
     "start": "npm run build:ssr && npm run serve:ssr"
   },
   "private": true,
