@@ -3,11 +3,10 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "serve:ssr:AutoTest.Frontend": "node dist/auto-test.frontend/server/server.mjs"
+    "build:ssr": "ng build && ng run AutoTest.Frontend:server",
+    "serve:ssr": "node dist/auto-test.frontend/server/main.js",
+    "start": "npm run build:ssr && npm run serve:ssr"
   },
   "private": true,
   "dependencies": {
