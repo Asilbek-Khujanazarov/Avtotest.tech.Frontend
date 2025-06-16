@@ -4,11 +4,13 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 8080 --host 0.0.0.0",
-    "build": "ng build  --configuration production",
+    "build": "ng build && ng run avto-test.frontend:server",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:AutoTest.Frontend": "node dist/auto-test.frontend/server/server.mjs",
-    "postinstall": "ng build --configuration production"
+    "postinstall": "ng build --configuration production",
+    "heroku-postbuild": "ng build && ng run avto-test.frontend:server"
+    
   },
   "private": true,
   "dependencies": {
