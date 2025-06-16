@@ -3,14 +3,12 @@
   "version": "0.0.0",
 "scripts": {
   "ng": "ng",
-  "start": "node dist/auto-test.frontend/server/main.js",
-  "build": "ng build",
-  "build:ssr": "ng build --configuration production && ng run AutoTest.Frontend:server:production",
-  "serve:ssr": "node dist/auto-test.frontend/server/main.js",
-  "heroku-postbuild": "npm run build:ssr"
+  "build": "npm run build:ssr",
+  "build:ssr": "ng build && ng run auto-test.frontend:server",
+  "start": "node dist/auto-test.frontend/server/main.mjs"
 },
-
   "type": "module",
+
   "private": true,
   "dependencies": {
     "@angular/common": "^19.2.0",
