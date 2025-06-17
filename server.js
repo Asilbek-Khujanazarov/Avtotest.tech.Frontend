@@ -7,7 +7,7 @@ app.use(express.static(path.join(__dirname, 'dist/AutoTest.Frontend')));
 
 // Send all requests to index.html
 app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname, 'dist/AutoTest.Frontend/index.html'));
+  res.sendFile(path.join(__dirname, 'dist/AutoTest.Frontend/browser/index.html'));
 });
 
 // Start the app by listening on the default Heroku port
