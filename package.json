@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node dist/auto-test.frontend/server/main.server.mjs",
+    "start": "node dist/auto-test.frontend/server/server.mjs",
     "build": "ng build",
     "heroku-postbuild": "ng build --configuration production && ng run AutoTest.Frontend:server:production"
   },
