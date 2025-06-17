@@ -1,11 +1,14 @@
 {
-  "name": "auto-test.frontend",
+  "name": "AutoTest.Frontend",
   "version": "0.0.0",
+  "engines": {
+    "node": "20.x"
+  },
   "scripts": {
     "ng": "ng",
-    "start": "node dist/auto-test.frontend/server/server.js",
+    "start": "node dist/AutoTest.Frontend/server/server.js",
     "build": "ng build",
-    "heroku-postbuild": "ng build --configuration production && ng run auto-test.frontend:server:production"
+    "heroku-postbuild": "ng build --configuration production && ng run AutoTest.Frontend:server:production"
   },
   "private": true,
   "dependencies": {
