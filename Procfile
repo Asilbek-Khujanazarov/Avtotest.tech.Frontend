@@ -1,1 +1,1 @@
-web: node dist/auto-test.frontend/server/server.mjs
+web: node dist/AutoTest.frontend/server/server.mjs
