@@ -10,8 +10,7 @@ import { takeUntil } from 'rxjs/operators';
   selector: 'app-forgot-password-verify',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './forgot-password-verify.component.html',
-  styleUrls: ['./forgot-password-verify.component.scss']
+  templateUrl: './forgot-password-verify.component.html'
 })
 export class ForgotPasswordVerifyComponent implements OnInit, OnDestroy {
   verifyForm: FormGroup;

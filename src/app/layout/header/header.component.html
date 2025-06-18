@@ -1,88 +1,84 @@
-<header class="header">
-  <div class="container header__container">
-    <div class="header__logo">
-      <i class="ri-car-line header__logo-icon"></i>
-      <span class="header__logo-text">Auto Test</span>
+<header class="bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700 py-2 relative">
+  <div class="max-w-[1200px] mx-auto flex items-center justify-between px-4">
+    <div class="flex items-center gap-2 text-2xl font-bold text-blue-600 dark:text-blue-400">
+      <i class="ri-car-line text-3xl"></i>
+      <span>Auto Test</span>
     </div>
-    
-    <!-- Mobile menu button -->
-    <button class="header__menu-btn" (click)="toggleMobileMenu()">
-      <i class="ri-menu-line"></i>
-    </button>
-
-    <!-- Mobile menu overlay -->
-    <div class="header__mobile-overlay" *ngIf="isMobileMenuOpen" (click)="closeMobileMenu()"></div>
-
-    <!-- Mobile menu -->
-    <div class="header__mobile-menu" [class.header__mobile-menu--open]="isMobileMenuOpen">
-      <div class="header__mobile-menu-header">
-        <button class="header__mobile-close" (click)="closeMobileMenu()">
-          <i class="ri-close-line"></i>
-        </button>
-      </div>
-
-      <nav class="header__mobile-nav">
+    <!-- Desktop navigation + Dark/Light switch -->
+    <div class="flex items-center gap-2">
+      <nav class="hidden md:flex items-center gap-4">
         <ng-container *ngIf="!isLoggedIn">
-          <a routerLink="/about" class="header__mobile-link" (click)="closeMobileMenu()">Biz haqimizda</a>
-          <a routerLink="/login" class="header__mobile-link" (click)="closeMobileMenu()">Kirish</a>
-          <a routerLink="/register" class="header__mobile-link header__mobile-link--primary" (click)="closeMobileMenu()">Ro'yxatdan o'tish</a>
+          <a routerLink="/about" class="text-black dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition">Biz haqimizda</a>
+          <button class="px-4 py-2 rounded text-black dark:text-white hover:bg-blue-50 dark:hover:bg-slate-800 transition" routerLink="/login">Kirish</button>
+          <button class="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 transition" routerLink="/register">Ro'yxatdan o'tish</button>
         </ng-container>
         <ng-container *ngIf="isLoggedIn">
-          <div class="header__mobile-user">
-            <div class="header__mobile-avatar">
-              <span class="header__avatar-text">{{ user?.firstName?.charAt(0) || 'U' }}</span>
-            </div>
-            <div class="header__mobile-user-info">
-              <div class="header__mobile-user-name">{{ user?.firstName }} {{ user?.lastName }}</div>
-              <div class="header__mobile-user-phone">+{{ user?.phoneNumber }}</div>
+          <div class="relative">
+            <button class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-semibold" (click)="toggleDropdown()">
+              {{ user?.firstName?.charAt(0) || 'U' }}
+            </button>
+            <div class="absolute right-0 mt-2 bg-white dark:bg-slate-900 rounded-lg shadow-lg min-w-[240px] z-50" *ngIf="isDropdownOpen">
+              <div class="flex items-center gap-3 p-4">
+                <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white font-semibold">{{ user?.firstName?.charAt(0) || 'U' }}</div>
+                <div>
+                  <div class="font-semibold text-slate-800 dark:text-slate-100">{{ user?.firstName }} {{ user?.lastName }}</div>
+                  <div class="text-xs text-slate-500">+{{ user?.phoneNumber }}</div>
+                </div>
+              </div>
+              <div class="h-px bg-gray-200 dark:bg-slate-700 my-2"></div>
+              <a routerLink="/profile" class="flex items-center gap-2 px-4 py-2 text-black dark:text-white hover:bg-blue-50 dark:hover:bg-slate-800 transition" (click)="closeDropdown()">
+                <i class="ri-user-line"></i> Profil ma'lumotlari
+              </a>
+              <button class="flex items-center gap-2 px-4 py-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900 transition w-full text-left" (click)="logout()">
+                <i class="ri-logout-box-line"></i> Chiqish
+              </button>
             </div>
           </div>
-          <a routerLink="/profile" class="header__mobile-link" (click)="closeMobileMenu()">
-            <i class="ri-user-line"></i>
-            Profil ma'lumotlari
+        </ng-container>
+      </nav>
+      <!-- Dark/Light mode switch -->
+      <button (click)="toggleDarkMode()" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-slate-800 transition ml-2">
+        <ng-container *ngIf="!isDarkMode">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.07l-.71.71M21 12h-1M4 12H3m16.66 6.66l-.71-.71M4.05 4.93l-.71-.71M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+        </ng-container>
+        <ng-container *ngIf="isDarkMode">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" /></svg>
+        </ng-container>
+      </button>
+      <!-- Mobile menu button -->
+      <button class="md:hidden p-2 text-xl text-slate-700 dark:text-slate-200" (click)="toggleMobileMenu()">
+        <i class="ri-menu-line"></i>
+      </button>
+    </div>
+    <!-- Mobile menu overlay -->
+    <div class="fixed inset-0 bg-black/40 z-30" *ngIf="isMobileMenuOpen" (click)="closeMobileMenu()"></div>
+    <!-- Mobile menu -->
+    <div class="fixed top-0 right-0 w-64 h-full bg-white dark:bg-slate-900 shadow-lg z-40 transform transition-transform duration-200 ease-in-out" [class.translate-x-0]="isMobileMenuOpen" [class.translate-x-full]="!isMobileMenuOpen">
+      <div class="flex justify-end p-4">
+        <button (click)="closeMobileMenu()" class="text-2xl text-slate-700 dark:text-slate-200"><i class="ri-close-line"></i></button>
+      </div>
+      <nav class="flex flex-col gap-2 px-6">
+        <ng-container *ngIf="!isLoggedIn">
+          <a routerLink="/about" class="py-2 px-3 rounded text-black dark:text-white hover:bg-blue-50 dark:hover:bg-slate-800 transition" (click)="closeMobileMenu()">Biz haqimizda</a>
+          <a routerLink="/login" class="py-2 px-3 rounded text-black dark:text-white hover:bg-blue-50 dark:hover:bg-slate-800 transition" (click)="closeMobileMenu()">Kirish</a>
+          <a routerLink="/register" class="py-2 px-3 rounded bg-blue-600 text-white text-center hover:bg-blue-700 transition" (click)="closeMobileMenu()">Ro'yxatdan o'tish</a>
+        </ng-container>
+        <ng-container *ngIf="isLoggedIn">
+          <div class="flex items-center gap-3 py-2">
+            <div class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-semibold">{{ user?.firstName?.charAt(0) || 'U' }}</div>
+            <div>
+              <div class="font-semibold text-black dark:text-white">{{ user?.firstName }} {{ user?.lastName }}</div>
+              <div class="text-xs text-slate-500">+{{ user?.phoneNumber }}</div>
+            </div>
+          </div>
+          <a routerLink="/profile" class="py-2 px-3 rounded text-black dark:text-white hover:bg-blue-50 dark:hover:bg-slate-800 transition flex items-center gap-2" (click)="closeMobileMenu()">
+            <i class="ri-user-line"></i> Profil ma'lumotlari
           </a>
-          <button class="header__mobile-link header__mobile-link--danger" (click)="logout(); closeMobileMenu()">
-            <i class="ri-logout-box-line"></i>
-            Chiqish
+          <button class="py-2 px-3 rounded text-red-600 hover:bg-red-50 dark:hover:bg-red-900 transition flex items-center gap-2" (click)="logout(); closeMobileMenu()">
+            <i class="ri-logout-box-line"></i> Chiqish
           </button>
         </ng-container>
       </nav>
     </div>
-
-    <!-- Desktop navigation -->
-    <nav class="header__nav">
-      <ng-container *ngIf="!isLoggedIn">
-        <a routerLink="/about" class="header__link">Biz haqimizda</a>
-        <button class="header__btn" routerLink="/login">Kirish</button>
-        <button class="header__btn header__btn--primary" routerLink="/register">Ro'yxatdan o'tish</button>
-      </ng-container>
-      <ng-container *ngIf="isLoggedIn">
-        <div class="header__avatar-container">
-          <button class="header__avatar" (click)="toggleDropdown()">
-            <span class="header__avatar-text">{{ user?.firstName?.charAt(0) || 'U' }}</span>
-          </button>
-          <div class="header__dropdown" *ngIf="isDropdownOpen">
-            <div class="header__dropdown-header">
-              <div class="header__dropdown-avatar">
-                <span class="header__avatar-text">{{ user?.firstName?.charAt(0) || 'U' }}</span>
-              </div>
-              <div class="header__dropdown-info">
-                <div class="header__dropdown-name">{{ user?.firstName }} {{ user?.lastName }}</div>
-                <div class="header__dropdown-phone">+{{ user?.phoneNumber }}</div>
-              </div>
-            </div>
-            <div class="header__dropdown-divider"></div>
-            <a routerLink="/profile" class="header__dropdown-item" (click)="closeDropdown()">
-              <i class="ri-user-line header__dropdown-icon"></i>
-              Profil ma'lumotlari
-            </a>
-            <button class="header__dropdown-item header__dropdown-item--danger" (click)="logout()">
-              <i class="ri-logout-box-line header__dropdown-icon"></i>
-              Chiqish
-            </button>
-          </div>
-        </div>
-      </ng-container>
-    </nav>
   </div>
 </header> 

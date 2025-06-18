@@ -10,8 +10,7 @@ import { takeUntil } from 'rxjs/operators';
   selector: 'app-login-verify',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './login-verify.component.html',
-  styleUrls: ['./login-verify.component.scss']
+  templateUrl: './login-verify.component.html'
 })
 export class LoginVerifyComponent implements OnInit, OnDestroy {
   verifyForm: FormGroup;
@@ -105,16 +104,14 @@ export class LoginVerifyComponent implements OnInit, OnDestroy {
       const response = await this.authService.loginVerify(data).toPromise();
       if (response?.item1?.accessToken) {
         this.authService.setToken(response.item1.accessToken);
-        
         if (typeof window !== 'undefined') {
           localStorage.setItem('refreshToken', response.item1.refreshToken);
           localStorage.setItem('user', JSON.stringify(response.item2));
         }
-        
+        this.authService.setUser(response.item2);
         const token = response.item1.accessToken;
         const payload = JSON.parse(atob(token.split('.')[1]));
         const role = payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
-        
         if (role === 'Admin') {
           this.router.navigate(['/admin-dashboard']);
         } else {

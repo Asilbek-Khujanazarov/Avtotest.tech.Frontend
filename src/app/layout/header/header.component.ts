@@ -8,8 +8,7 @@ import { Subscription } from 'rxjs';
   selector: 'app-header',
   standalone: true,
   imports: [RouterModule, CommonModule],
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   isLoggedIn = false;
@@ -19,6 +18,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private authSubscription: Subscription;
   private userSubscription: Subscription;
   private isBrowser: boolean;
+  isDarkMode = false;
 
   constructor(
     private authService: AuthService,
@@ -41,6 +41,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
       if (userStr) {
         this.authService.setUser(JSON.parse(userStr));
       }
+      // Dark mode init
+      const dark = localStorage.getItem('theme');
+      this.isDarkMode = dark === 'dark';
+      this.applyDarkMode();
     }
   }
 
@@ -77,6 +81,23 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.authService.logout();
     this.closeDropdown();
     this.closeMobileMenu();
+  }
+
+  toggleDarkMode() {
+    this.isDarkMode = !this.isDarkMode;
+    localStorage.setItem('theme', this.isDarkMode ? 'dark' : 'light');
+    this.applyDarkMode();
+  }
+
+  applyDarkMode() {
+    if (this.isBrowser) {
+      const root = document.documentElement;
+      if (this.isDarkMode) {
+        root.classList.add('dark');
+      } else {
+        root.classList.remove('dark');
+      }
+    }
   }
 
   ngOnDestroy() {

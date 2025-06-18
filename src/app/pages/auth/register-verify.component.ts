@@ -10,8 +10,7 @@ import { takeUntil } from 'rxjs/operators';
   selector: 'app-register-verify',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './register-verify.component.html',
-  styleUrls: ['./register-verify.component.scss']
+  templateUrl: './register-verify.component.html'
 })
 export class RegisterVerifyComponent implements OnInit, OnDestroy {
   verifyForm: FormGroup;

@@ -1,52 +1,55 @@
-<section class="home">
-  <div class="home__content">
-    <h1 class="home__title">Haydovchilik Guvohnomasi Imtihoniga <br><span class="home__title--highlight">Tayyorlaning</span></h1>
-    <p class="home__desc">
+<section class="flex justify-center items-start min-h-[80vh] bg-none dark:bg-slate-900 transition-colors">
+  <div class="w-full max-w-[1100px] mx-auto pt-12 px-4 flex flex-col items-center">
+    <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-3 text-slate-800 dark:text-slate-100">
+      Haydovchilik Guvohnomasi Imtihoniga <br>
+      <span class="text-blue-600 dark:text-blue-400">Tayyorlaning</span>
+    </h1>
+    <p class="text-base sm:text-lg md:text-[1.15rem] text-slate-600 dark:text-slate-300 text-center max-w-[600px] mb-7">
       Auto Test platformasi orqali haydovchilik guvohnomasi olish uchun nazariy bilimlaringizni sinab ko'ring va imtihonga mukammal tayyorgarlik ko'ring.
     </p>
-    <div class="home__actions">
-      <button class="home__btn home__btn--primary">Bepul Boshlash</button>
-      <a class="home__btn home__btn--outline" routerLink="/about" role="button">Batafsil Ma'lumot</a>
+    <div class="flex flex-col sm:flex-row gap-4 mb-9 w-full justify-center">
+      <button class="px-7 py-3 rounded-lg text-base sm:text-[1.1rem] font-medium bg-blue-600 text-white transition hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600">Bepul Boshlash</button>
+      <a class="px-7 py-3 rounded-lg text-base sm:text-[1.1rem] font-medium border border-blue-600 text-blue-600 bg-white transition text-center hover:bg-blue-50 dark:bg-slate-800 dark:text-blue-400 dark:border-blue-400 dark:hover:bg-slate-700" routerLink="/about" role="button">Batafsil Ma'lumot</a>
     </div>
-    <div class="home__features">
-      <div class="home__feature home__feature--blue">
-        <span class="home__feature-icon">
+    <div class="flex flex-col md:flex-row gap-6 my-9 w-full justify-center">
+      <div class="bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-xl hover:shadow-blue-500/30 hover:scale-105 transition-all duration-300 p-8 min-w-[220px] max-w-[370px] w-full text-left flex flex-col items-start mx-auto">
+        <span class="mb-4 block">
           <svg width="48" height="48" fill="none"><path d="M12 8a4 4 0 0 0-4 4v24a4 4 0 0 0 4 4h24" stroke="#2563eb" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M36 8a4 4 0 0 1 4 4v24a4 4 0 0 1-4 4H12" stroke="#2563eb" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </span>
-        <h3>Keng Qamrovli Test</h3>
-        <p>Yo'l harakati qoidalari bo'yicha 1000+ savol bilan amaliyot qiling</p>
+        <h3 class="text-lg font-semibold my-2 text-slate-800 dark:text-slate-100">Keng Qamrovli Test</h3>
+        <p class="text-slate-700 dark:text-slate-300 text-base m-0">Yo'l harakati qoidalari bo'yicha 1000+ savol bilan amaliyot qiling</p>
       </div>
-      <div class="home__feature home__feature--green">
-        <span class="home__feature-icon">
+      <div class="bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-xl hover:shadow-green-500/30 hover:scale-105 transition-all duration-300 p-8 min-w-[220px] max-w-[370px] w-full text-left flex flex-col items-start mx-auto">
+        <span class="mb-4 block">
           <svg width="48" height="48" fill="none"><circle cx="24" cy="24" r="20" stroke="#22c55e" stroke-width="3"/><path d="M17 25l5 5 9-11" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </span>
-        <h3>Real Imtihon Sharoiti</h3>
-        <p>Haqiqiy imtihon kabi vaqt chegarasi va savollar bilan mashq qiling</p>
+        <h3 class="text-lg font-semibold my-2 text-slate-800 dark:text-slate-100">Real Imtihon Sharoiti</h3>
+        <p class="text-slate-700 dark:text-slate-300 text-base m-0">Haqiqiy imtihon kabi vaqt chegarasi va savollar bilan mashq qiling</p>
       </div>
-      <div class="home__feature home__feature--purple">
-        <span class="home__feature-icon">
+      <div class="bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-xl hover:shadow-purple-500/30 hover:scale-105 transition-all duration-300 p-8 min-w-[220px] max-w-[370px] w-full text-left flex flex-col items-start mx-auto">
+        <span class="mb-4 block">
           <svg width="48" height="48" fill="none"><circle cx="24" cy="18" r="8" stroke="#a21caf" stroke-width="3"/><path d="M8 40c0-6.627 7.163-12 16-12s16 5.373 16 12" stroke="#a21caf" stroke-width="3"/></svg>
         </span>
-        <h3>Statistika va Tahlil</h3>
-        <p>O'z natijalaringizni kuzatib boring va zaif tomonlaringizni aniqlang</p>
+        <h3 class="text-lg font-semibold my-2 text-slate-800 dark:text-slate-100">Statistika va Tahlil</h3>
+        <p class="text-slate-700 dark:text-slate-300 text-base m-0">O'z natijalaringizni kuzatib boring va zaif tomonlaringizni aniqlang</p>
       </div>
     </div>
-    <div class="home__stats home__stats--row">
-      <div class="home__stat home__stat--blue">
-        <span>10,000+</span>
-        <div>Foydalanuvchilar</div>
+    <div class="flex flex-col md:flex-row justify-between items-center bg-white dark:bg-slate-900 rounded-2xl shadow-lg py-8 md:py-10 px-0 mt-8 w-full max-w-[98%] gap-4 md:gap-0">
+      <div class="flex-1 min-w-[120px] max-w-[300px] text-center flex flex-col items-center">
+        <span class="font-bold text-2xl md:text-[2.2rem] mb-1 text-blue-600 dark:text-blue-400">10,000+</span>
+        <div class="text-sm md:text-base text-slate-700 dark:text-slate-200">Foydalanuvchilar</div>
       </div>
-      <div class="home__stat home__stat--green">
-        <span>95%</span>
-        <div>Muvaffaqiyat Darajasi</div>
+      <div class="flex-1 min-w-[120px] max-w-[300px] text-center flex flex-col items-center">
+        <span class="font-bold text-2xl md:text-[2.2rem] mb-1 text-green-500 dark:text-green-400">95%</span>
+        <div class="text-sm md:text-base text-slate-700 dark:text-slate-200">Muvaffaqiyat Darajasi</div>
       </div>
-      <div class="home__stat home__stat--purple">
-        <span>1,000+</span>
-        <div>Test Savollari</div>
+      <div class="flex-1 min-w-[120px] max-w-[300px] text-center flex flex-col items-center">
+        <span class="font-bold text-2xl md:text-[2.2rem] mb-1 text-purple-700 dark:text-purple-400">1,000+</span>
+        <div class="text-sm md:text-base text-slate-700 dark:text-slate-200">Test Savollari</div>
       </div>
-      <div class="home__stat home__stat--orange">
-        <span>24/7</span>
-        <div>Onlayn Qo'llab-quvvatlash</div>
+      <div class="flex-1 min-w-[120px] max-w-[300px] text-center flex flex-col items-center">
+        <span class="font-bold text-2xl md:text-[2.2rem] mb-1 text-orange-600 dark:text-orange-400">24/7</span>
+        <div class="text-sm md:text-base text-slate-700 dark:text-slate-200">Onlayn Qo'llab-quvvatlash</div>
       </div>
     </div>
   </div>
