@@ -89,20 +89,20 @@ export class AuthService {
     );
   }
 
-  loginVerify(data: any): Observable<any> {
-    return this.addTimeout(
-      this.http.post(`${this.api}/Auth/login/verify`, data).pipe(
-        tap((response: any) => {
-          if (response.token) {
-            this.setToken(response.token);
-            if (response.user) {
-              this.setUser(response.user);
-            }
+loginVerify(data: any): Observable<any> {
+  return this.addTimeout(
+    this.http.post(`${this.api}/Auth/login/verify`, data).pipe(
+      tap((response: any) => {
+        if (response?.item1?.accessToken) {
+          this.setToken(response.item1.accessToken);
+          if (response.item2) {
+            this.setUser(response.item2);
           }
-        })
-      )
-    );
-  }
+        }
+      })
+    )
+  );
+}
 
   forgotPassword(phoneNumber: string) {
     return this.addTimeout(
@@ -116,16 +116,16 @@ export class AuthService {
     );
   }
 
-  setToken(token: string) {
-    if (isPlatformBrowser(this.platformId)) {
-      localStorage.setItem('token', token);
-      this.isAuthenticatedSubject.next(true);
-    }
+setToken(token: string) {
+  if (isPlatformBrowser(this.platformId)) {
+    localStorage.setItem('accessToken', token);
+    this.isAuthenticatedSubject.next(true);
   }
+}
 
   removeToken() {
     if (isPlatformBrowser(this.platformId)) {
-      localStorage.removeItem('token');
+      localStorage.removeItem('accessToken');
       localStorage.removeItem('refreshToken');
       localStorage.removeItem('user');
       this.isAuthenticatedSubject.next(false);
@@ -151,4 +151,5 @@ export class AuthService {
   getUser() {
     return this.userSubject.value;
   }
+  
 } 

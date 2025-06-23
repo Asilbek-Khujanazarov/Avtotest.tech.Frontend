@@ -13,6 +13,7 @@ import { ForgotPasswordVerifyComponent } from './pages/auth/forgot-password-veri
 import { AdminGuard } from './guards/admin.guard';
 import { authGuard } from './guards/auth.guard';
 import { guestGuard } from './guards/guest.guard';
+import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 
 export const routes: Routes = [
   {
@@ -27,9 +28,10 @@ export const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
       { path: 'login', component: LoginComponent, canActivate: [guestGuard] },
       { path: 'login-verify', component: LoginVerifyComponent, canActivate: [guestGuard] },
-      { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [guestGuard] },
-      { path: 'forgot-password-verify', component: ForgotPasswordVerifyComponent, canActivate: [guestGuard] },
+      { path: 'forgot-password', component: ForgotPasswordComponent },
+      { path: 'forgot-password-verify', component: ForgotPasswordVerifyComponent},
       // boshqa sahifalar shu yerga qo'shiladi
+      { path: 'my-profile', component: MyProfileComponent, canActivate: [authGuard] }
     ]
   },
 ];
