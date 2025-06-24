@@ -31,9 +31,28 @@
     <!-- Main profile card -->
     <main class="flex-1 flex flex-col gap-6">
         <section class="bg-white dark:bg-slate-800 rounded-2xl p-8  flex-col items-center shadow-lg">
-            <div
-                class="w-24 h-24 rounded-full bg-blue-100 dark:bg-slate-700 flex items-center justify-center text-4xl font-bold text-blue-600 dark:text-blue-200 mb-4">
-                {{ user?.firstName?.charAt(0) || '' }}{{ user?.lastName?.charAt(0) || '' }}
+
+            <div class="relative mb-4 flex items-center gap-5">
+                <div
+                    class="w-20 h-20 rounded-full bg-blue-100 dark:bg-slate-700 flex items-center justify-center text-3xl font-bold text-blue-600 dark:text-blue-200 overflow-hidden">
+                    <ng-container *ngIf="user?.avatarUrl; else initials">
+                        <img [src]="user?.avatarUrl" alt="Avatar" class="w-full h-full object-cover" />
+                    </ng-container>
+                    <ng-template #initials>
+                        {{ user?.firstName?.charAt(0) || '' }}{{ user?.lastName?.charAt(0) || '' }}
+                    </ng-template>
+                </div>
+                <!-- Kichik va ishlaydigan avatar yuklash tugmasi -->
+                <label class="ml-2">
+                    <span
+                        class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-2 py-1 rounded-lg transition flex items-center gap-2 text-sm cursor-pointer select-none"
+                        title="Rasm yuklash">
+                        <i class="ri-upload-cloud-2-line text-base"></i>
+                        Rasm yuklash
+                    </span>
+                    <input type="file" accept="image/*" class="hidden" (change)="onAvatarChange($event)" />
+                </label>
+                <div *ngIf="avatarUploading" class="text-xs text-blue-500 ml-2">Yuklanmoqda...</div>
             </div>
             <div class="text-2xl font-semibold text-gray-900 dark:text-white mb-2">{{ user?.firstName }} {{
                 user?.lastName }}</div>
@@ -41,8 +60,10 @@
                 Ma’lumotlarni o‘zgartirish
             </button>
 
-            <div class="text-gray-500 dark:text-gray-400 text-sm">Holat: {{user?.isVerified == true ? 'Tasdiqlangan' : 'Tasdiqlanmagan' }}</div>
-            <div class="text-gray-500 dark:text-gray-400 text-sm">Ro'yxatdan o'tgan vaqt: {{ user?.registeredDate | date: 'longDate' }}</div>
+            <div class="text-gray-500 dark:text-gray-400 text-sm">Holat: {{user?.isVerified == true ? 'Tasdiqlangan' :
+                'Tasdiqlanmagan' }}</div>
+            <div class="text-gray-500 dark:text-gray-400 text-sm">Ro'yxatdan o'tgan vaqt: {{ user?.registeredDate |
+                date: 'longDate' }}</div>
         </section>
 
         <section class="bg-white dark:bg-slate-800 rounded-2xl p-6 grid grid-cols-1 md:grid-cols-2 gap-6 shadow-lg">
