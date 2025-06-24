@@ -12,7 +12,6 @@ export interface UserProfile {
     isVerified: boolean;
     registeredDate: string;
     lastLoginDate: string | null;
-    avatarUrl?: string;
 }
 
 @Injectable({
@@ -25,11 +24,5 @@ export class UserService {
 
     getMyProfile(): Observable<UserProfile> {
         return this.http.get<UserProfile>(`${this.api}/User/me`);
-    }
-
-    uploadAvatar(file: File) {
-        const formData = new FormData();
-        formData.append('File', file);
-        return this.http.post<{ avatarUrl: string }>(`${this.api}/User/avatar`, formData);
     }
 }
