@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs';
+import { UserProfile, UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +15,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isLoggedIn = false;
   isDropdownOpen = false;
   isMobileMenuOpen = false;
-  user: any = null;
+  user: UserProfile | null = null;
   private authSubscription: Subscription;
   private userSubscription: Subscription;
   private isBrowser: boolean;
@@ -22,6 +23,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
+     private userService: UserService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.isBrowser = isPlatformBrowser(this.platformId);
@@ -45,6 +47,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
       const dark = localStorage.getItem('theme');
       this.isDarkMode = dark === 'dark';
       this.applyDarkMode();
+
+      this.userService.getMyProfile().subscribe({
+        next: (user) => {
+          this.user = user;
+        }
+      });
     }
   }
 
