@@ -1,0 +1,33 @@
+<div class="min-h-screen flex flex-col gap-4 p-4 sm:p-6 bg-gray-100 dark:bg-slate-900">
+  <header class="bg-white dark:bg-slate-800 rounded-2xl p-4 sm:p-6 shadow-lg max-w-3xl mx-auto w-full">
+    <h1 class="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white mb-4 text-center">Admin Dashboard</h1>
+    
+    <!-- Tablar -->
+    <div class="flex flex-col sm:flex-row gap-2 justify-center mb-4">
+      <button
+        (click)="setActiveTab('create')"
+        [class]="activeTab === 'create' ? 'bg-blue-600 text-white' : 'bg-gray-200 dark:bg-slate-700 text-gray-900 dark:text-gray-300'"
+        class="w-full sm:w-auto px-3 py-1.5 text-sm rounded-lg transition shadow-sm text-center"
+      >
+        Savol yaratish
+      </button>
+      <button
+        (click)="setActiveTab('manage')"
+        [class]="activeTab === 'manage' ? 'bg-blue-600 text-white' : 'bg-gray-200 dark:bg-slate-700 text-gray-900 dark:text-gray-300'"
+        class="w-full sm:w-auto px-3 py-1.5 text-sm rounded-lg transition shadow-sm text-center"
+      >
+        Savollar boshqaruvi
+      </button>
+    </div>
+  </header>
+
+  <!-- Kontent -->
+  <main class="max-w-3xl mx-auto w-full">
+    <div *ngIf="activeTab === 'create'">
+      <app-create-question></app-create-question>
+    </div>
+    <div *ngIf="activeTab === 'manage'">
+      <app-management-question></app-management-question>
+    </div>
+  </main>
+</div>

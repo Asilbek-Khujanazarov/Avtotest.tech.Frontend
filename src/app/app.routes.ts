@@ -4,7 +4,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { AboutComponent } from './pages/about/about.component';
 import { RegisterComponent } from './pages/auth/register.component';
 import { RegisterVerifyComponent } from './pages/auth/register-verify.component';
-import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
+import { AdminDashboardComponent } from './pages/Admin/admin-dashboard/admin-dashboard.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LoginComponent } from './pages/auth/login.component';
 import { LoginVerifyComponent } from './pages/auth/login-verify.component';
@@ -24,7 +24,7 @@ export const routes: Routes = [
       { path: 'about', component: AboutComponent },
       { path: 'register', component: RegisterComponent, canActivate: [guestGuard] },
       { path: 'verify-code', component: RegisterVerifyComponent, canActivate: [guestGuard] },
-      { path: 'admin-dashboard', component: AdminDashboardComponent, canActivate: [authGuard, AdminGuard] },
+      { path: 'admin-dashboard', component: AdminDashboardComponent, canActivate: [authGuard] },
       { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
       { path: 'login', component: LoginComponent, canActivate: [guestGuard] },
       { path: 'login-verify', component: LoginVerifyComponent, canActivate: [guestGuard] },
