@@ -210,7 +210,6 @@ export class CreateQuestionComponent {
       next: () => {
         this.loading = false;
         this.clearForm();
-        alert('Savol muvaffaqiyatli yaratildi!');
       },
       error: (err: { message: any; }) => {
         this.loading = false;

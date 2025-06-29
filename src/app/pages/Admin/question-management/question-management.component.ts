@@ -235,7 +235,7 @@ export class ManagementQuestionComponent implements OnInit {
                 this.loading = false;
                 this.cancelEdit();
                 this.loadQuestions();
-                alert('Savol muvaffaqiyatli yangilandi!');
+          
             },
             error: (err: any) => {
                 this.loading = false;
