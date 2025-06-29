@@ -5,18 +5,18 @@ import { catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
 export interface Answer {
-    image: any;
     id: string;
-    text: string;
-    imageUrl?: string | null;
+    text: string | null; // Ixtiyoriy
+    image?: File | null; // Ixtiyoriy
+    imageUrl?: string | null; // Ixtiyoriy
     isCorrect: boolean;
-    correctDescription?: string | null;
+    correctDescription?: string | null; // Ixtiyoriy
 }
 
 export interface Question {
     id: string;
-    text: string;
-    imageUrl?: string | null;
+    text: string | null; // Ixtiyoriy
+    imageUrl?: string | null; // Ixtiyoriy
     answers: Answer[];
 }
 
@@ -28,8 +28,8 @@ export class QuestionService {
 
     constructor(private http: HttpClient) { }
 
-    createQuestion(formData: FormData): Observable<Question> {
-        return this.http.post<Question>(`${this.api}/Question`, formData).pipe(
+    createQuestion(formData: FormData): Observable<void> {
+        return this.http.post<void>(`${this.api}/Question`, formData).pipe(
             catchError(this.handleError)
         );
     }

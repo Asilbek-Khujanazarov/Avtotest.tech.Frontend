@@ -1,5 +1,5 @@
-<div class="min-h-[70vh] flex flex-col gap-4 p-4 sm:p-6">
-  <main class="bg-white dark:bg-slate-800 rounded-2xl p-4 sm:p-6 shadow-lg max-w-3xl mx-auto w-full">
+<div class="min-h-[90vh] flex flex-col gap-4 p-4 sm:p-6">
+ <main class="bg-white dark:bg-slate-800 rounded-2xl p-4 sm:p-6 shadow-lg max-w-3xl mx-auto w-full">
     <h1 class="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white text-center mb-4">Yangi savol yaratish</h1>
     
     <form [formGroup]="questionForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
@@ -10,10 +10,10 @@
           formControlName="text"
           class="w-full p-2 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
           rows="4"
-          placeholder="Savolni kiriting..."
+          placeholder="Savolni kiriting (ixtiyoriy)"
         ></textarea>
-        <div *ngIf="questionForm.get('text')?.invalid && questionForm.get('text')?.touched" class="text-red-500 text-xs mt-1 text-center">
-          Savol matni kiritilishi shart
+        <div *ngIf="questionForm.errors?.['textOrImage'] && questionForm.touched" class="text-red-500 text-xs mt-1 text-center">
+          Savolda matn yoki rasm bo‘lishi shart
         </div>
       </div>
 
@@ -48,7 +48,7 @@
               <span class="text-sm font-semibold text-gray-700 dark:text-gray-300">{{ getLetter(i) }}</span>
               <input
                 type="radio"
-                [formControlName]="'isCorrect'"
+                formControlName="isCorrect"
                 [value]="true"
                 (change)="setCorrectAnswer(i)"
                 class="w-4 h-4 text-blue-600"
@@ -62,8 +62,8 @@
                 rows="2"
                 placeholder="Javob matnini kiriting (ixtiyoriy, agar rasm yuklanmasa)"
               ></textarea>
-              <div *ngIf="answer.get('text')?.errors?.['required'] && answer.get('text')?.touched" class="text-red-500 text-xs mt-1 text-center">
-                Javob matni yoki rasm kiritilishi shart
+              <div *ngIf="answer.errors?.['textOrImage'] && answer.touched" class="text-red-500 text-xs mt-1 text-center">
+                Javobda matn yoki rasm bo‘lishi shart
               </div>
             </div>
             <div class="flex flex-col gap-3 mb-2">
@@ -117,7 +117,7 @@
       <div *ngIf="error" class="bg-red-100 dark:bg-red-900/50 text-red-600 dark:text-red-300 text-xs p-2 rounded-lg text-center max-w-md mx-auto">{{ error }}</div>
       <div *ngIf="loading" class="bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-300 text-xs p-2 rounded-lg text-center max-w-md mx-auto">Yuklanmoqda...</div>
 
-      <!-- Tugmalar: to‘liq kenglik va ustma-ust -->
+      <!-- Tugmalar -->
       <div class="flex flex-col gap-3 w-full max-w-xs mx-auto">
         <button
           type="submit"

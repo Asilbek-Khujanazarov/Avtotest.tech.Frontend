@@ -32,10 +32,10 @@ export class ManagementQuestionComponent implements OnInit {
         private sanitizer: DomSanitizer
     ) {
         this.questionForm = this.fb.group({
-            text: ['', Validators.required],
+            text: [''],
             image: [null],
             answers: this.fb.array([], [Validators.required, this.minAnswersValidator(2), this.oneCorrectAnswerValidator()])
-        });
+        }, { validators: this.textOrImageValidator() });
     }
 
     ngOnInit(): void {
@@ -90,6 +90,14 @@ export class ManagementQuestionComponent implements OnInit {
         return (control: FormGroup): { [key: string]: any } | null => {
             const text = control.get('text')?.value;
             const image = control.get('image')?.value;
+            return (text && text.trim()) || image ? null : { textOrImage: true };
+        };
+    }
+
+    answerTextOrImageValidator() {
+        return (control: FormGroup): { [key: string]: any } | null => {
+            const text = control.get('text')?.value;
+            const image = control.get('image')?.value;
             const imageUrl = control.get('imageUrl')?.value;
             return (text && text.trim()) || image || imageUrl ? null : { textOrImage: true };
         };
@@ -102,7 +110,7 @@ export class ManagementQuestionComponent implements OnInit {
             imageUrl: [answer?.imageUrl || ''],
             isCorrect: [answer?.isCorrect || false],
             correctDescription: [answer?.correctDescription || '']
-        }, { validators: this.textOrImageValidator() });
+        }, { validators: this.answerTextOrImageValidator() });
     }
 
     addAnswer(answer?: Answer): void {
@@ -127,7 +135,7 @@ export class ManagementQuestionComponent implements OnInit {
         this.editingQuestionId = question.id;
         this.questionForm.reset();
         this.questionForm.patchValue({
-            text: question.text,
+            text: question.text || '',
             image: null
         });
         this.questionImagePreview = question.imageUrl ? this.sanitizer.bypassSecurityTrustUrl(question.imageUrl) : null;
@@ -208,7 +216,7 @@ export class ManagementQuestionComponent implements OnInit {
         }
 
         const formData = new FormData();
-        formData.append('Text', this.questionForm.get('text')?.value);
+        formData.append('Text', this.questionForm.get('text')?.value || '');
         
         const questionImage = this.questionForm.get('image')?.value;
         if (questionImage) {
@@ -230,12 +238,15 @@ export class ManagementQuestionComponent implements OnInit {
         });
 
         this.loading = true;
-        this.questionService.updateQuestion(this.editingQuestionId!, formData).subscribe({
+        const request = this.editingQuestionId
+            ? this.questionService.updateQuestion(this.editingQuestionId, formData)
+            : this.questionService.createQuestion(formData);
+        
+        request.subscribe({
             next: () => {
                 this.loading = false;
                 this.cancelEdit();
                 this.loadQuestions();
-          
             },
             error: (err: any) => {
                 this.loading = false;
@@ -261,7 +272,6 @@ export class ManagementQuestionComponent implements OnInit {
                     this.showDeleteDialog = false;
                     this.questionToDelete = null;
                     this.loadQuestions();
-                    alert('Savol muvaffaqiyatli o‘chirildi!');
                 },
                 error: (err: any) => {
                     this.loading = false;
@@ -286,8 +296,8 @@ export class ManagementQuestionComponent implements OnInit {
     }
 
     private getFormValidationErrors(): string {
-        if (this.questionForm.get('text')?.errors?.['required']) {
-            return 'Savol matni kiritilishi shart';
+        if (this.questionForm.errors?.['textOrImage']) {
+            return 'Savolda matn yoki rasm bo‘lishi shart';
         }
         if (this.answers.errors?.['minAnswers']) {
             return 'Kamida 2 ta javob bo‘lishi kerak';

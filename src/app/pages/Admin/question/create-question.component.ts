@@ -21,13 +21,13 @@ export class CreateQuestionComponent {
 
   constructor(private fb: FormBuilder, private questionService: QuestionService, private sanitizer: DomSanitizer) {
     this.questionForm = this.fb.group({
-      text: ['', Validators.required],
+      text: [''],
       image: [null],
       answers: this.fb.array([
         this.createAnswer(),
         this.createAnswer()
       ], [this.minAnswersValidator(2), this.oneCorrectAnswerValidator()])
-    });
+    }, { validators: this.textOrImageRequiredValidator() });
   }
 
   get answers(): FormArray {
@@ -36,19 +36,28 @@ export class CreateQuestionComponent {
 
   createAnswer(): FormGroup {
     return this.fb.group({
-      text: ['', this.textOrImageRequiredValidator()],
+      text: [''],
       image: [null],
       isCorrect: [false],
       correctDescription: ['']
-    });
+    }, { validators: this.answerTextOrImageRequiredValidator() });
   }
 
-  // Validatsiya: Har bir javobda matn yoki rasm bo‘lishi shart
+  // Validatsiya: Savolda matn yoki rasm bo‘lishi shart
   textOrImageRequiredValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const text = control.get('text')?.value;
       const image = control.get('image')?.value;
-      return (text || image) ? null : { required: 'Javob matni yoki rasm kiritilishi shart' };
+      return (text && text.trim()) || image ? null : { textOrImage: 'Savolda matn yoki rasm bo‘lishi shart' };
+    };
+  }
+
+  // Validatsiya: Har bir javobda matn yoki rasm bo‘lishi shart
+  answerTextOrImageRequiredValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const text = control.get('text')?.value;
+      const image = control.get('image')?.value;
+      return (text && text.trim()) || image ? null : { textOrImage: 'Javobda matn yoki rasm bo‘lishi shart' };
     };
   }
 
@@ -57,7 +66,7 @@ export class CreateQuestionComponent {
     return (control: AbstractControl): ValidationErrors | null => {
       const formArray = control as FormArray;
       if (!(formArray instanceof FormArray)) {
-        return null; // Agar FormArray bo‘lmasa, xato qaytarmaymiz
+        return null;
       }
       return formArray.length >= min ? null : { minAnswers: 'Kamida 2 ta javob bo‘lishi kerak' };
     };
@@ -68,7 +77,7 @@ export class CreateQuestionComponent {
     return (control: AbstractControl): ValidationErrors | null => {
       const formArray = control as FormArray;
       if (!(formArray instanceof FormArray)) {
-        return null; // Agar FormArray bo‘lmasa, xato qaytarmaymiz
+        return null;
       }
       const hasCorrect = formArray.controls.some(control => control.get('isCorrect')?.value);
       return hasCorrect ? null : { oneCorrectAnswer: 'Kamida bitta to‘g‘ri javob tanlanishi kerak' };
@@ -82,7 +91,6 @@ export class CreateQuestionComponent {
     } else {
       this.error = 'Maksimal 6 ta javob qo‘shish mumkin';
     }
-    // FormArray validatsiyasini qayta ishga tushirish
     this.answers.updateValueAndValidity();
   }
 
@@ -94,7 +102,6 @@ export class CreateQuestionComponent {
         this.selectedImage = null;
       }
     }
-    // FormArray validatsiyasini qayta ishga tushirish
     this.answers.updateValueAndValidity();
   }
 
@@ -114,10 +121,10 @@ export class CreateQuestionComponent {
       if (type === 'question') {
         this.questionForm.patchValue({ image: file });
         this.questionImagePreview = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file));
+        this.questionForm.updateValueAndValidity();
       } else if (type === 'answer' && index !== undefined) {
         this.answers.at(index).patchValue({ image: file });
         this.answerImagePreviews[index] = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file));
-        // Rasm qo‘shilganda validatsiyani qayta tekshirish
         this.answers.at(index).updateValueAndValidity();
       }
       this.imageUploading = false;
@@ -141,13 +148,13 @@ export class CreateQuestionComponent {
       if (this.selectedImage === this.questionImagePreview) {
         this.selectedImage = null;
       }
+      this.questionForm.updateValueAndValidity();
     } else if (type === 'answer' && index !== undefined) {
       this.answers.at(index).patchValue({ image: null });
       this.answerImagePreviews[index] = null;
       if (this.selectedImage === this.answerImagePreviews[index]) {
         this.selectedImage = null;
       }
-      // Rasm olib tashlanganda validatsiyani qayta tekshirish
       this.answers.at(index).updateValueAndValidity();
     }
   }
@@ -159,7 +166,6 @@ export class CreateQuestionComponent {
         control.patchValue({ correctDescription: '' });
       }
     });
-    // FormArray validatsiyasini qayta ishga tushirish
     this.answers.updateValueAndValidity();
   }
 
@@ -172,7 +178,6 @@ export class CreateQuestionComponent {
     this.answerImagePreviews = [null, null];
     this.selectedImage = null;
     this.error = null;
-    // FormArray validatsiyasini qayta ishga tushirish
     this.answers.updateValueAndValidity();
   }
 
@@ -184,7 +189,7 @@ export class CreateQuestionComponent {
     }
 
     const formData = new FormData();
-    formData.append('Text', this.questionForm.get('text')?.value);
+    formData.append('Text', this.questionForm.get('text')?.value || '');
     
     const questionImage = this.questionForm.get('image')?.value;
     if (questionImage) {
@@ -192,10 +197,8 @@ export class CreateQuestionComponent {
     }
 
     const answers = this.questionForm.get('answers')?.value;
-    answers.forEach((answer: Answer, index: number) => {
-      if (answer.text) {
-        formData.append(`Answers[${index}].Text`, answer.text);
-      }
+    answers.forEach((answer: any, index: number) => {
+      formData.append(`Answers[${index}].Text`, answer.text || '');
       if (answer.image) {
         formData.append(`Answers[${index}].Image`, answer.image);
       }
@@ -210,16 +213,16 @@ export class CreateQuestionComponent {
       next: () => {
         this.loading = false;
         this.clearForm();
+        alert('Savol muvaffaqiyatli yaratildi!');
       },
-      error: (err: { message: any; }) => {
+      error: (err: any) => {
         this.loading = false;
         this.error = `Savol yaratishda xatolik: ${err.message || 'Server xatosi'}`;
       }
     });
   }
 
-  // 🔤 Belgilar uchun harfni olish (A, B, C, D)
   getLetter(index: number): string {
-    return String.fromCharCode(65 + index); // A=65, B=66, C=67, D=68...
+    return String.fromCharCode(65 + index);
   }
 }

@@ -1,33 +1,75 @@
-<div class="min-h-screen flex flex-col gap-4 p-4 sm:p-6 bg-gray-100 dark:bg-slate-900">
-  <header class="bg-white dark:bg-slate-800 rounded-2xl p-4 sm:p-6 shadow-lg max-w-3xl mx-auto w-full">
-    <h1 class="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white mb-4 text-center">Admin Dashboard</h1>
-    
-    <!-- Tablar -->
-    <div class="flex flex-col sm:flex-row gap-2 justify-center mb-4">
+<div class="min-h-screen w-full flex bg-gray-100 dark:bg-slate-900 relative overflow-hidden">
+  <!-- SIDEBAR -->
+  <aside
+    class="fixed md:static top-0 left-0 h-full w-[70%] md:w-64 bg-white dark:bg-slate-800 z-40 transform transition-transform duration-300 ease-in-out"
+    [ngClass]="{
+      'translate-x-0': isSidebarOpen || isDesktop(),
+      '-translate-x-full': !isSidebarOpen && !isDesktop()
+    }"
+  >
+    <div class="h-full flex flex-col gap-4 p-4">
+      <!-- Mobilda yopish tugmasi -->
+      <div class="flex justify-end md:hidden">
+        <button
+          (click)="toggleSidebar()"
+          class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-lg text-sm"
+        >
+          &laquo;
+        </button>
+      </div>
+
+      <!-- Tugmalar -->
       <button
         (click)="setActiveTab('create')"
-        [class]="activeTab === 'create' ? 'bg-blue-600 text-white' : 'bg-gray-200 dark:bg-slate-700 text-gray-900 dark:text-gray-300'"
-        class="w-full sm:w-auto px-3 py-1.5 text-sm rounded-lg transition shadow-sm text-center"
+        [ngClass]="{
+          'bg-blue-600 text-white': activeTab === 'create',
+          'bg-gray-200 dark:bg-slate-700 text-gray-900 dark:text-gray-300': activeTab !== 'create'
+        }"
+        class="w-full px-4 py-2 rounded-lg text-sm"
       >
         Savol yaratish
       </button>
+
       <button
         (click)="setActiveTab('manage')"
-        [class]="activeTab === 'manage' ? 'bg-blue-600 text-white' : 'bg-gray-200 dark:bg-slate-700 text-gray-900 dark:text-gray-300'"
-        class="w-full sm:w-auto px-3 py-1.5 text-sm rounded-lg transition shadow-sm text-center"
+        [ngClass]="{
+          'bg-blue-600 text-white': activeTab === 'manage',
+          'bg-gray-200 dark:bg-slate-700 text-gray-900 dark:text-gray-300': activeTab !== 'manage'
+        }"
+        class="w-full px-4 py-2 rounded-lg text-sm"
       >
         Savollar boshqaruvi
       </button>
     </div>
-  </header>
+  </aside>
 
-  <!-- Kontent -->
-  <main class="max-w-3xl mx-auto w-full">
-    <div *ngIf="activeTab === 'create'">
-      <app-create-question></app-create-question>
+  <!-- Overlay (faqat mobil uchun) -->
+  <div
+    *ngIf="isSidebarOpen && !isDesktop()"
+    class="fixed inset-0 bg-black/50 z-30 md:hidden"
+    (click)="toggleSidebar()"
+  ></div>
+
+  <!-- ASOSIY KONTENT -->
+  <div class="flex-1 h-screen overflow-y-auto p-4 md:ml-64">
+    <!-- Mobilda sidebar ochuvchi tugma -->
+    <div class="flex items-center mb-4 md:hidden">
+      <button
+        *ngIf="!isSidebarOpen"
+        (click)="toggleSidebar()"
+        class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-lg text-sm"
+      >
+        &raquo;
+      </button>
     </div>
-    <div *ngIf="activeTab === 'manage'">
-      <app-management-question></app-management-question>
+
+    <div class="w-full h-full">
+      <div *ngIf="activeTab === 'create'" class="w-full h-full">
+        <app-create-question class="w-full h-full block"></app-create-question>
+      </div>
+      <div *ngIf="activeTab === 'manage'" class="w-full h-full">
+        <app-management-question class="w-full h-full block"></app-management-question>
+      </div>
     </div>
-  </main>
+  </div>
 </div>

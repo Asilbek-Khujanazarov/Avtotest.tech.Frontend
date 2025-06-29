@@ -18,7 +18,7 @@
         <div class="flex flex-col gap-4 items-center">
           <!-- Savol matni va rasm -->
           <div class="flex flex-col gap-3 items-center w-full">
-            <h2 class="text-base sm:text-lg font-semibold text-gray-900 dark:text-white text-center">{{ question.text }}</h2>
+            <h2 *ngIf="question.text" class="text-base sm:text-lg font-semibold text-gray-900 dark:text-white text-center">{{ question.text }}</h2>
             <div *ngIf="question.imageUrl" class="relative w-full max-w-xs">
               <img [src]="question.imageUrl" class="w-full h-32 sm:h-40 object-cover rounded-lg cursor-pointer border-2 border-white dark:border-slate-700" alt="Savol rasmi" (click)="openImage(question.imageUrl)" loading="lazy" />
               <button (click)="removeImage('question')" class="absolute -top-2 -right-2 bg-white dark:bg-slate-700 text-red-500 hover:bg-red-100 dark:hover:bg-red-900/50 rounded-full w-6 h-6 flex items-center justify-center transition">
@@ -66,10 +66,10 @@
                   formControlName="text"
                   class="w-full p-2 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                   rows="4"
-                  placeholder="Savolni kiriting..."
+                  placeholder="Savolni kiriting (ixtiyoriy)"
                 ></textarea>
-                <div *ngIf="questionForm.get('text')?.invalid && questionForm.get('text')?.touched" class="text-red-500 text-xs mt-1 text-center">
-                  Savol matni kiritilishi shart
+                <div *ngIf="questionForm.errors?.['textOrImage'] && questionForm.touched" class="text-red-500 text-xs mt-1 text-center">
+                  Savolda matn yoki rasm bo‘lishi shart
                 </div>
               </div>
 
@@ -82,7 +82,7 @@
                     <input type="file" accept="image/jpeg,image/png" class="hidden" (change)="onImageChange($event, 'question')" />
                   </label>
                   <div *ngIf="imageUploading" class="text-xs text-blue-500">Yuklanmoqda...</div>
-                  <!-- <div class="text-gray-500 dark:text-gray-400 text-xs">Maksimal hajmi: 5MB (JPEG yoki PNG)</div> -->
+                  <div class="text-gray-500 dark:text-gray-400 text-xs">Maksimal hajmi: 5MB (JPEG yoki PNG)</div>
                 </div>
                 <div *ngIf="questionImagePreview" class="relative w-full max-w-xs">
                   <img (click)="openImage(questionImagePreview)" class="w-full h-32 sm:h-40 object-cover rounded-lg cursor-pointer border-2 border-white dark:border-slate-700" alt="Savol rasmi" [src]="questionImagePreview" />
@@ -124,13 +124,13 @@
                       </div>
                     </div>
                     <div class="flex flex-col gap-3 mb-2">
-                      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                      <div class="flex flex-col sm:flex-row gap-3 items-center">
                         <label class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-1.5 rounded-lg transition flex items-center justify-center gap-2 cursor-pointer select-none shadow-sm">
                           <i class="ri-upload-cloud-2-line text-sm"></i>
                           Javob uchun rasm
                           <input type="file" accept="image/jpeg,image/png" class="hidden" (change)="onImageChange($event, 'answer', i)" />
                         </label>
-                        <!-- <div class="text-gray-500 dark:text-gray-400 text-xs">Maksimal hajmi: 5MB (JPEG yoki PNG)</div> -->
+                        <div class="text-gray-500 dark:text-gray-400 text-xs">Maksimal hajmi: 5MB (JPEG yoki PNG)</div>
                       </div>
                       <div *ngIf="answerImagePreviews[i]" class="relative w-full max-w-[120px] sm:max-w-[150px]">
                         <img (click)="openImage(answerImagePreviews[i])" class="w-full h-20 sm:h-24 object-cover rounded-lg cursor-pointer border-2 border-white dark:border-slate-700" alt="Javob rasmi" [src]="answerImagePreviews[i]" />
