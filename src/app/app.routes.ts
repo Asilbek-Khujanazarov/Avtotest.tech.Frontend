@@ -5,7 +5,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { RegisterComponent } from './pages/auth/register.component';
 import { RegisterVerifyComponent } from './pages/auth/register-verify.component';
 import { AdminDashboardComponent } from './pages/Admin/admin-dashboard/admin-dashboard.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { DashboardComponent } from './pages/Dashboards/dashboard/dashboard.component';
 import { LoginComponent } from './pages/auth/login.component';
 import { LoginVerifyComponent } from './pages/auth/login-verify.component';
 import { ForgotPasswordComponent } from './pages/auth/forgot-password.component';

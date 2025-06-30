@@ -1,6 +1,5 @@
-<div
-  class="min-h-screen flex flex-col md:flex-row gap-4 p-4 bg-transparent text-gray-900 dark:text-white">
-<!-- Mobile Menu Toggle Button -->
+<div class="min-h-screen flex flex-col md:flex-row gap-4 p-4 bg-transparent text-gray-900 dark:text-white">
+  <!-- Mobile Menu Toggle Button -->
   <button
     class="md:hidden fixed bottom-4 right-4 z-50 bg-blue-600 dark:bg-blue-500 text-white p-3 rounded-full shadow-lg focus:outline-none"
     (click)="toggleSidebar()">
@@ -27,33 +26,25 @@
       <button class="text-gray-600 dark:text-gray-300 focus:outline-none" (click)="toggleSidebar()">
         <i class="ri-close-line text-2xl"></i>
       </button>
-      <!-- Theme Toggle Button -->
-      <button class="text-gray-600 dark:text-gray-300 focus:outline-none" (click)="toggleTheme()"
-        title="Kunduzgi/Tungi rejimni almashtirish">
-        <i class="ri-{{ isDarkMode ? 'sun-line' : 'moon-line' }} text-2xl"></i>
-      </button>
     </div>
 
-    <!-- Theme Toggle Button for Desktop -->
-    <div class="hidden md:flex justify-end">
-      <button class="text-gray-600 dark:text-gray-300 focus:outline-none" (click)="toggleTheme()"
-        title="Kunduzgi/Tungi rejimni almashtirish">
-        <i class="ri-{{ isDarkMode ? 'sun-line' : 'moon-line' }} text-2xl"></i>
-      </button>
-    </div>
 
+    <!-- Savol Qo'shish -->
     <a class="flex items-center gap-3 px-3 py-3 rounded-xl font-semibold"
       [ngClass]="{'bg-blue-600 dark:bg-blue-700 text-white': activeSection === 'create-question', 'text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700': activeSection !== 'create-question'}"
       href="#" (click)="setActiveSection('create-question', $event)">
-      <i class="ri-user-3-line text-xl"></i>
+      <i class="ri-lightbulb-line text-xl"></i> <!-- Savol qo‘shish uchun mos icon -->
       Savol Qo'shish
     </a>
+
+    <!-- Savollarni Boshqarish -->
     <a class="flex items-center gap-3 px-3 py-3 rounded-xl"
       [ngClass]="{'bg-blue-600 dark:bg-blue-700 text-white': activeSection === 'manage-questions', 'text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700': activeSection !== 'manage-questions'}"
       href="#" (click)="setActiveSection('manage-questions', $event)">
-      <i class="ri-briefcase-line text-xl"></i>
+      <i class="ri-file-list-3-line	 text-xl"></i> <!-- Boshqarish uchun mos icon -->
       Savollarni Boshqarish
     </a>
+    <!-- 
     <a class="flex items-center gap-3 px-3 py-3 rounded-xl"
       [ngClass]="{'bg-blue-600 dark:bg-blue-700 text-white': activeSection === 'certificates', 'text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700': activeSection !== 'certificates'}"
       href="#" (click)="setActiveSection('certificates', $event)">
@@ -71,7 +62,7 @@
       href="#" (click)="setActiveSection('devices', $event)">
       <i class="ri-computer-line text-xl"></i>
       Qurilmalarim
-    </a>
+    </a> -->
   </aside>
 
   <!-- Main Content -->
@@ -86,15 +77,15 @@
       </div>
       <div *ngIf="activeSection === 'certificates'"
         class="w-full h-full flex items-center justify-center text-gray-600 dark:text-gray-300">
-        Sertifikatlarim bo'limi 
+        Sertifikatlarim bo'limi
       </div>
       <div *ngIf="activeSection === 'payment-history'"
         class="w-full h-full flex items-center justify-center text-gray-600 dark:text-gray-300">
-        To‘lovlar tarixi bo'limi 
+        To‘lovlar tarixi bo'limi
       </div>
       <div *ngIf="activeSection === 'devices'"
         class="w-full h-full flex items-center justify-center text-gray-600 dark:text-gray-300">
-        Qurilmalarim bo'limi 
+        Qurilmalarim bo'limi
       </div>
       <div *ngIf="!activeSection"
         class="w-full h-full flex items-center justify-center text-gray-600 dark:text-gray-300">
